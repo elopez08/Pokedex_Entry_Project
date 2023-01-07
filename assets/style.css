@@ -10,7 +10,6 @@
     background-color: red;
 }
 
-//Left side of Pokedex
 #left {
     width: 400px;
     height: 500px;
@@ -19,32 +18,6 @@
     z-index: 1;
 }
 
-#screen {
-    height: 245px;
-    width: 260ps;
-    padding: 0 20px;
-    background-color: #b0b0b0;
-    float: left;
-
-    position: absolute;
-    top: 130px;
-    left: 19px;
-}
-
-#picture {
-    height: 175px;
-    width: 254px;
-    margin-top: 20px;
-    margin-bottom: 9px;
-    background-color: #fff;
-    border: 3px solid #494949;
-    clear: both;
-}
-
-#picture img {
-    display: block;
-    margin: 0 auto;
-}
 
 #curve1_left {
     width: 201px;
@@ -102,7 +75,6 @@
 }
 
 
-//Right side of Pokedex
 #right {
     width: 350px;
     height: 500px;
@@ -111,7 +83,70 @@
 }
 
 
-//Stats Screen
+/* Cross make Beginning! */
+
+/* Base square structure for the cross */
+#cross {
+    width: 90px;
+    height: 90px;
+
+    position: absolute;
+    top: 394px;
+    left: 230px;
+}
+
+#topCross {
+    width: 30px;
+    height: 30px;
+    background-color: #222;
+
+    position: absolute;
+    top: 0px;
+    left: 30px;
+}
+
+#leftCross {
+    width: 30px;
+    height: 30px;
+    background-color: #222;
+    z-index: 1;
+
+    position: absolute;
+    left: 0px;
+    top: 30px;
+}
+
+#midCross {
+    width: 30px;
+    height: 30px;
+    background-color: #222;
+
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+#rightCross {
+    width: 30px;
+    height: 30px;
+    background-color: #222;
+
+    position: absolute;
+    top: 30px;
+    right: 0px;
+}
+
+#bottomCross {
+    width: 30px;
+    height: 30px;
+    background-color: #222;
+
+    position: absolute;
+    bottom: 0px;
+    left: 30px;
+}
+
+/* End of Cross */
 
 #stats {
     height: 130px;
@@ -129,5 +164,9 @@
     -moz-border-radius: 15px;
     -o-border-radius: 15px;
 
+    box-shadow: 0 0 20px #003300 inset;
+    -webkit-box-shadow: 0 0 20px #003300 inset;
+    -moz-box-shadow: 0 0 20px #003300 inset;
+    -o-box-shadow: 0 0 20px #003300 inset;
+
 }
-//End Stats
