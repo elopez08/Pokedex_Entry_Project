@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#pokedex {
+    width: 750px;
+    height: 500px;
+    margin: 50px auto 0 auto;
+    background-color: red;
+}
+
+//Left side of Pokedex
+#left {
+    width: 400px;
+    height: 500px;
+    float: left;
+    position: relative;
+    z-index: 1;
+}
+
+
+#curve1_left {
+    width: 201px;
+    height: 85px;
+    background-color: #8b0000;
+    float: left;
+    padding: 15px 0 0 15px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    box-shadow: -10px 9px #5e0000;
+    -webkit-box-shadow: -10px 9px #5e0000;
+    -moz-box-shadow: -10px 9px #5e0000;
+    -o-box-shadow: -10px 9px #5e0000;
+
+    border-bottom-right-radius: 85px 60px;
+    -webkit-border-bottom-right-radius: 85px 60px;
+    -moz-border-bottom-right-radius: 85px 60px;
+    -o-border-bottom-right-radius: 85px 60px;
+
+    border-top-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+
+}
+
+#bg_curve1_left {
+    width: 400px;
+    height: 80px;
+    background-color: #8b0000;
+
+    border-top-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+}
+
+#curve2_left {
+    width: 216px;
+    height: 451px;
+    background-color: #c00d0d;
+    float: right;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    border-top-left-radius:85px 60px;
+    -webkit-border-top-left-radius: 85px 60px;
+    -moz-border-top-left-radius: 85px 60px;
+    -o-border-top-left-radius: 85px 60px;    
+}
+
+
+//Right side of Pokedex
+#right {
+    width: 350px;
+    height: 500px;
+    float: left;
+    position: relative;
+}
+
+
+//Stats Screen
+
+#stats {
+    height: 130px;
+    width: 280px;
+    padding: 10px;
+    background-color: rgb(86, 234, 143);
+    z-index: 1;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 130px;
+    left: 25px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -o-border-radius: 15px;
+
+}
+//End Stats
