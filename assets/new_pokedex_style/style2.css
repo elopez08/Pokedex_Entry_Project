@@ -1,0 +1,379 @@
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+p{
+    color: white;
+    -webkit-text-stroke: 1px black;
+    font-size: 3vh;
+}
+/* Shortcut Solution for the Capitalize */
+p::first-letter{
+    text-transform: capitalize;
+}
+
+:root {
+    --main-color: red;
+}
+
+#pokedex {
+    width: 1050px;
+    height: 900px;
+    margin: 50px auto 0 auto;
+    background-color: rgb(113, 113, 238);
+}
+
+#top, #bottom {
+    position: relative;
+    width: 1050px;
+    height: 350px;
+
+}
+
+#top {
+
+}
+
+#top_curve_1 {
+    width: 1050px;
+    height: 420px;
+    background-color: #8b0000;
+    float: left;
+    padding: 15px 0 0 15px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    box-shadow: -10px 9px #5e0000;
+    -webkit-box-shadow: -10px 9px #5e0000;
+    -moz-box-shadow: -10px 9px #5e0000;
+    -o-box-shadow: -10px 9px #5e0000;
+
+    border-bottom-right-radius: 85px 60px;
+    -webkit-border-bottom-right-radius: 85px 60px;
+    -moz-border-bottom-right-radius: 85px 60px;
+    -o-border-bottom-right-radius: 85px 60px;
+
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+
+}
+
+#top_screen, #bottom_screen {
+    width: 600px;
+    height: 300px;
+    background-color: greenyellow;
+    position: absolute;
+    
+}
+
+
+
+#top_screen {
+    top: 60px;
+    left: 200px;
+}
+
+#image {
+
+}
+
+#image img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#speaker-layout {
+
+    z-index: 1;
+    width: 100px;
+    height: 200px;
+    position:  absolute;
+    left: 900px;
+    top: 300px;
+
+}
+
+#speaker-line {
+    width: 100px;
+    height: 5px;
+    background-color: black;
+    margin: 3px;
+
+}
+
+#middle_junction {
+    width: 1000px;
+    height: 60px;
+    background-color: blue;
+    position: relative;
+    float:inherit;
+    top: 100px;
+
+}
+
+#bottom_curve_1{
+    width: 1050px;
+    height: 420px;
+    background-color: #d65a5a;
+    float: left;
+    padding: 15px 0 0 15px;
+
+    position: absolute;
+    top: 105px;
+    left: 0;
+
+    box-shadow: -10px 9px #5e0000;
+    -webkit-box-shadow: -10px 9px #5e0000;
+    -moz-box-shadow: -10px 9px #5e0000;
+    -o-box-shadow: -10px 9px #5e0000;
+
+    border-bottom-right-radius: 85px 60px;
+    -webkit-border-bottom-right-radius: 85px 60px;
+    -moz-border-bottom-right-radius: 85px 60px;
+    -o-border-bottom-right-radius: 85px 60px;
+
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+}
+
+#bottom_screen {
+    top: 150px;
+    left: 200px;
+}
+
+/* Dropdown list */
+#dropdown-language, #dropdown-info-list {
+    position: absolute;
+    margin: 0;
+}
+
+/* Stylized for the list */
+#list-sel {
+    width: 50px;
+    height: 25px;
+    background-color: rgb(70, 245, 245);
+
+    opacity: 0.7;
+
+    border-top-right-radius: 20px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 15px;
+}
+
+#dropdown-language p, #dropdown-content p {
+    color: black;
+}
+
+#dropdown-info-list {
+    left: 565px;
+}
+
+
+
+#dropdown-content {
+    display: none;
+}
+#dropdown-language:hover #dropdown-content {
+    display: block;
+}
+#dropdown-info-list:hover #dropdown-content {
+    display: block;
+}
+
+#bottom_screen h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#bottom_screen p {
+    margin: 10px;
+}
+
+#dropdown-language p, #dropdown-content p {
+    font-size: 1.5vh;
+    color: white;
+}
+
+/* D-Pad button layout */
+
+#d-pad {
+
+    z-index: 1;
+
+    width: 210px;
+    height: 2100px;
+
+    position: absolute;
+    top: 180px;
+    left: 20px;
+
+}
+
+#up, #down, #left, #right, #middle {
+    width: 50px;
+    height: 50px;
+
+    position: absolute;
+
+    background-color: grey;
+
+}
+
+#up, #down, #middle {
+    left: 50px;
+}
+
+#left, #right, #middle {
+    top: 50px;
+}
+
+#up {
+    top: 0px;
+}
+
+#up-arrow {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-bottom: 30px solid #111;
+    border-right: 20px solid transparent;
+    position: absolute;
+
+    top: 10%;
+    left: 10%;
+}
+
+#down {
+    top: 100px;
+}
+
+#down-arrow {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-top: 30px solid #111;
+    border-right: 20px solid transparent;
+    position: absolute;
+
+    bottom: 10%;
+    left: 10%;
+}
+
+#left {
+    left: 0px;
+}
+
+#left-arrow {
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-right: 30px solid #111;
+    border-bottom: 20px solid transparent;
+    position: absolute;
+
+    top: 10%;
+    left: 10%;
+}
+
+#right {
+    left: 100px;
+    box-shadow: -3px 2px #010101;
+    -webkit-box-shadow: -3px 2px #010101;
+    -moz-box-shadow: -3px 2px #010101;
+    -o-box-shadow: -3px 2px #010101;
+
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    -o-border-top-right-radius: 5px;
+
+    border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    -o-border-bottom-right-radius: 5px;
+}
+
+#right-arrow {
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-left: 30px solid #111;
+    border-bottom: 20px solid transparent;
+    position: absolute;
+    top: 6px;
+    right: 10px;
+}
+
+#middle-circle {
+    width: 50px;
+    height: 50px;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -o-border-radius: 30px;
+
+    background: radial-gradient(#111, #222);
+    background: -webkit-radial-gradient(#111, #222);
+    background: -moz-radial-gradient(#111, #222);
+    background: -o-radial-gradient(#111, #222);
+
+}
+
+/* Keypad laytout */
+#keypad_map {
+    z-index: 1;
+
+    width: 100px;
+
+    position: absolute;
+    top: 250px;
+    left: 880px;
+}
+
+#keypad_btn {
+    height: 30px;
+    width: 30px;
+    background-color: teal;
+    float: left;
+}
+
+/* Button groups for bottom */
+#buttons_group {
+    z-index: 1;
+
+    width: 600px;
+
+    position: absolute;
+    top: 390px;
+    left: 200px;
+}
+
+/* Individual buttons designs */
+
+
+#button_stats, #button_geo, #button_tmhm_list, #button_moves, #button_map {
+    height: 50px;
+    width: 100px;
+    background-color: grey;
+    margin: 10px;
+
+    float: left;
+}
