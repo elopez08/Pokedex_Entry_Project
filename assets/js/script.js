@@ -11,6 +11,10 @@ let pokedexData = {
     validationPokemonInfo: function(data){
 
         var i =0;
+
+        //Array for the Move List
+        moveListArray = [];
+
         console.log(`This function is working!  With this, we'll be able to extract the Pokemon information from the PokeAPI database!`);
         console.log(`The information for this Pokemon is: `);
         console.log(data);
@@ -92,7 +96,7 @@ let pokedexData = {
         console.log(`The array for the this is: 
         =============================================`);
         console.log(moveList.length);
-        
+
 
         while (i<moveList.length)
         {
@@ -100,6 +104,15 @@ let pokedexData = {
             ===================================
             Also, the move is: `);
             console.log(data.moves[i].move.name);
+
+            moveListArray.push(
+                `
+                <h2 class="moveListForPokemon">${data.moves[i].move.name}</h2>
+                `
+            );
+            let finalString = moveListArray.join("");
+            document.querySelector(".move_name_list").innerHTML = finalString;
+
             i++;
         }
 
