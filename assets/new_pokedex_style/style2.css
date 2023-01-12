@@ -377,3 +377,8 @@ p::first-letter{
 
     float: left;
 }
+
+
+.move_name_list {
+    height: 400px;
+}

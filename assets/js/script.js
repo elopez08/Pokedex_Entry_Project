@@ -11,19 +11,43 @@ let pokedexData = {
     validationPokemonInfo: function(data){
 
         var i =0;
+        var k =0;
 
         //Array for the Move List
         moveListArray = [];
+        typeListArray = [];
 
         console.log(`This function is working!  With this, we'll be able to extract the Pokemon information from the PokeAPI database!`);
         console.log(`The information for this Pokemon is: `);
         console.log(data);
 
+        //Extract the name from the data
         const { name } = data;
-        const types = data.types[0].type.name;
+        //Extract the typing from the data
+        const typings = data.types;
 
-        document.querySelector(".Name").innerText = name;
-        document.querySelector(".Type").innerText = types;
+        //Capatalize the first letter of the name
+        const capFirstName = name.charAt(0).toUpperCase() + name.slice(1);        
+
+        //Extract the typing from each array (since some Pokemon have 2 typings)
+        while (k<typings.length)
+        {
+           typeListArray.push(data.types[k].type.name);
+            k++;
+        }
+        //With the array made, for each word, capatalize before joining the array
+        for (let j=0; j<typeListArray.length; j++)
+        {
+            //wordsSplitSpace[j][0].toUpperCase() + wordsSplitSpace[j].substr(1);
+            typeListArray[j] = typeListArray[j][0].toUpperCase() + typeListArray[j].substr(1);
+        }
+        //Have the words join together with a "/" symbol
+        var finalTyping = typeListArray.join("/");
+
+        //Display the name on the HTML
+        document.querySelector(".Name").innerText = capFirstName;
+        //Display the typings on the HTML
+        document.querySelector(".Type").innerText = finalTyping;
 
 
         //This needs to be in a loop for it to work.  Otherwise, data.types[0].type.name ONLY selects the first type
@@ -31,7 +55,6 @@ let pokedexData = {
         console.log(data.types[0].type.name);
 
         //This is for the stats for the Pokemon.  We need to retrieve this information and then apply it in the dex somehow:
-
         const { stats } = data;
         console.log(`The information for the stats is: `);
         console.log(stats);
@@ -56,16 +79,19 @@ let pokedexData = {
         document.querySelector(".Speed").innerText = "Speed: " + speed;
         document.querySelector(".Total").innerText = "Total: " + total;
 
+
+
         //To get the specific name of the move of the Pokemon, do the following:
         //data.moves[0].move.name
         const first_move = data.moves[0].move.name;
-        console.log(`The first move for ` + name + `is the following:
-        =======================================================`);
-        //This is going to be "mega-punch"
-        console.log(first_move);
-        
-        //On the database, there's a '-' on it in case it's a two letter word.  We need to take the '-' out when doing the Dex
 
+        //  This test works to have the first move extracted and displayed
+        //console.log(`The first move for ` + name + `is the following:
+        //=======================================================`);
+        //This is going to be "mega-punch"
+        //console.log(first_move);
+
+        //On the database, there's a '-' on it in case it's a two letter word.  We need to take the '-' out when doing the Dex
         const moveNameExt = first_move;
 
         //If there's a space between the words:
