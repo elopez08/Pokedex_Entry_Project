@@ -113,8 +113,6 @@ let pokedexData = {
         //Last step to putting in the list:
         document.querySelector(".FirstMove").innerText = finalWords;
 
-
-
         const moveList = data.moves;
         console.log(`The information for the moves are:
         =============================================`);
@@ -126,14 +124,30 @@ let pokedexData = {
 
         while (i<moveList.length)
         {
-            console.log(`Counting up: ` + i + `
-            ===================================
-            Also, the move is: `);
-            console.log(data.moves[i].move.name);
+            //console.log(`Counting up: ` + i + `
+            //===================================
+            //Also, the move is: `);
+            //The name that is extracted
+            //console.log(data.moves[i].move.name);
 
+            //Split
+            const moveNameListSplit = data.moves[i].move.name;
+            const moveNameListExt = moveNameListSplit.split("-");
+
+            for (let j=0; j< moveNameListExt.length; j++)
+            {
+                moveNameListExt[j] = moveNameListExt[j][0].toUpperCase() + moveNameListExt[j].substr(1);
+            }
+            //Splicing with space
+            var finalMoveName = moveNameListExt.join(" ");
+            console.log(`The name of the move that is on the list is: 
+            =========================================================`);
+            console.log(finalMoveName);
+
+            //This is for the list and display in the block
             moveListArray.push(
                 `
-                <h2 class="moveListForPokemon">${data.moves[i].move.name}</h2>
+                <h2 class="moveListForPokemon">${finalMoveName}</h2>
                 `
             );
             let finalString = moveListArray.join("");
