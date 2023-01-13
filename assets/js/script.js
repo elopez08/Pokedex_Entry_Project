@@ -1,18 +1,20 @@
 
 
 let pokedexData = {
+    //Lower the case of the search before fetching data
     searchExtract: function() {
         this.fetchPokemonData(document.querySelector(".search-bar").value.toLowerCase());
     },
+    //Fetching the data of the Pokemon
     fetchPokemonData: function(pokemonName){
         fetch("https://pokeapi.co/api/v2/pokemon/"+pokemonName).then((response) => response.json())
         .then((data) => this.validationPokemonInfo(data))
     },
+    //Validating the information of the Pokemon
     validationPokemonInfo: function(data){
 
         var i =0;
         var k =0;
-
         //Array for the Move List
         moveListArray = [];
         typeListArray = [];
@@ -153,11 +155,48 @@ let pokedexData = {
             let finalString = moveListArray.join("");
             document.querySelector(".move_name_list").innerHTML = finalString;
 
+            const { url } = data.moves[i].move;
+            // Verifying that the move is being read
+            //console.log(`The url for the move is: 
+            //=====================================`);
+            //console.log(url);
+
+            //Attempting to use the URL for the move that was extracted
+            this.moveListInfo(url);
+
             i++;
         }
+    },
+    //Looking up the move list before displaying
+    moveListInfo: function(url) {
+        fetch(url).then((response) => response.json())
+        .then((data) => this.verifyMove(data))
+    },
+    verifyMove: function(data) {
+        //Information safely extracted after giving the URL
+        console.log(`The information for the move is: 
+        ======================================`);
+        console.log(data);
+        //We need:  accuracy, power, pp, type.name
+        const { accuracy, name, power, pp } = data;
+        //We need the type of attack:
+        const type_attack = data.type.name;
+        //Need a damage class:
+        const damageClass = data.damage_class.name;
 
+        const moveNameSplit = name.split("-");
+        for (let j=0; j< moveNameSplit.length; j++)
+        {
+            moveNameSplit[j] = moveNameSplit[j][0].toUpperCase() + moveNameSplit[j].substr(1);
+        }
+        var nameChange = moveNameSplit.join(" ");
 
-
+        console.log(`Accuracy is: ` + accuracy + `
+        Power is: ` + power + `
+        pp is: `+pp + `
+        name is: `+ nameChange + `
+        Type of attack: `+type_attack+`
+        Damage class is: `+damageClass);
 
     }
 };
