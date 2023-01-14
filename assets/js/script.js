@@ -142,9 +142,11 @@ let pokedexData = {
             }
             //Splicing with space
             var finalMoveName = moveNameListExt.join(" ");
+            /*
             console.log(`The name of the move that is on the list is: 
             =========================================================`);
             console.log(finalMoveName);
+            */
 
             //This is for the list and display in the block
             moveListArray.push(
@@ -173,37 +175,153 @@ let pokedexData = {
         .then((data) => this.verifyMove(data))
     },
     verifyMove: function(data) {
+        //Start out with an empty array
+        moveTableArray = [];
         //Information safely extracted after giving the URL
+        /*
         console.log(`The information for the move is: 
         ======================================`);
         console.log(data);
+        */
         //We need:  accuracy, power, pp, type.name
         const { accuracy, name, power, pp } = data;
         //We need the type of attack:
         const type_attack = data.type.name;
         //Need a damage class:
         const damageClass = data.damage_class.name;
+        //Description of the attack
+        const { effect } = data.effect_entries[0];
+        console.log(`The effect for the attack is: ` + effect);
 
         const moveNameSplit = name.split("-");
         for (let j=0; j< moveNameSplit.length; j++)
         {
+            //Move Name changing to cap on the first letter of each word
             moveNameSplit[j] = moveNameSplit[j][0].toUpperCase() + moveNameSplit[j].substr(1);
         }
         var nameChange = moveNameSplit.join(" ");
+        //Capitalize the type of attack
+        var typeAttackChange = type_attack.charAt(0).toUpperCase()+type_attack.slice(1);
+        var damageClassChange = damageClass.charAt(0).toUpperCase()+damageClass.slice(1);
 
-        console.log(`Accuracy is: ` + accuracy + `
-        Power is: ` + power + `
-        pp is: `+pp + `
+        //What if the info says null?
+        var accuracyNumber;
+        var powerNumber;
+        if (!accuracy)
+        {
+            accuracyNumber = "-";
+        }
+        else
+        {
+            accuracyNumber = accuracy;
+        }
+
+        if (!power)
+        {
+            powerNumber = "-";
+        }
+        else
+        {
+            powerNumber = power;
+        }
+
+        console.log(
+        `
+        Accuracy is: ` + accuracyNumber + `
+        Power is: ` + powerNumber + `
+        pp is: `+ pp + `
         name is: `+ nameChange + `
-        Type of attack: `+type_attack+`
-        Damage class is: `+damageClass);
+        Type of attack: `+ typeAttackChange+`
+        Damage class is: `+ damageClassChange);
+
+        moveTableArray.push(
+            `
+            <p class="accuracy" >Accuracy: ${accuracyNumber} </p>
+            <p class="power" >Power: ${powerNumber}</p>
+            <p class="pp" >PP: ${pp}</p>
+            <p class="name" >Name: ${nameChange}</p>
+            <p class="type" >Type: ${typeAttackChange}</p>
+            <p class="damageClass" >Damage Class: ${damageClassChange}</p>
+            `
+        )
+
+        //Writing the code to the HTML
+        document.querySelector(".move_block").innerHTML = moveTableArray;
+    }
+};
+
+let pokedexDataTwo = {
+    //Search.  Allow user to capitalize, but lower case the letters to have the data search correctly
+    searchExtractTwo: function() {
+        this.fetchPokemonDataTwo(document.querySelector(".search-bar").value.toLowerCase());
+    },
+    fetchPokemonDataTwo: function(pokemonName){
+        fetch("https://pokeapi.co/api/v2/pokemon/"+pokemonName).then((response) => response.json())
+        .then((data) => this.extractMove(data))
+    },
+    extractMove(data){
+        const moveListNames = data.moves;
+        this.nameAndMoveSetUp(data, moveListNames);
+    },
+    nameAndMoveSetUp(data, moveListNames){
+        //Move name, stats for it
+        var moveInfo = ([],[]);
+        var moveStats = [];
+        var moveTest = ([],[]);
+        var moveListTest = [];
+        console.log(`The list of the names are as follows for the nameAndMoveSetup
+        =========================================================================`);
+        console.log(moveListNames);
+        console.log(`The data for the Pokemon is:
+        =========================================`);
+        console.log(data);
+        console.log(`How many moves are there for this Pokemon? ` + moveListNames.length);
+
+        /*The following works:
+
+        const { url } = data.moves[0].move;
+
+        console.log(`The url for the move is: 
+        ====================================`);
+        console.log(url);
+        fetch(url)
+        .then((response) => response.json())
+        .then(data => {
+            console.log(`The information for the data is: 
+            ============================================`);
+            console.log(data);
+            moveTest = ([data.name, data.accuracy, data.power, data.pp, data.type.name, data.damage_class.name]);
+            console.log(`The current information is: 
+            =========================================`);
+            //name, accuracy, power, pp, name, type, damage_class
+
+            console.log(moveTest);
+        });
+
+        */
+        for (let j=0; j<moveListNames.length; j++)
+        {
+            const { url } = data.moves[j].move;
+            fetch(url)
+            .then((response) => response.json())
+            .then(data => {
+                moveTest = ([data.name, data.accuracy, data.power, data.pp, data.type.name, data.damage_class.name]);
+                moveListTest.push(moveTest);
+                //name, accuracy, power, pp, name, type, damage_class
+                //console.log(moveListTest);
+            })
+        }
+        console.log(`The full list of the moves are:
+        ============================================`);
+        console.log(moveListTest);
 
     }
+
 };
 
 document.querySelector(".search-bar").addEventListener("keyup", function(event){
     if (event.key == "Enter")
     {
-        pokedexData.searchExtract();
+        pokedexDataTwo.searchExtractTwo();
     }
 });
