@@ -1,3 +1,4 @@
+//const { renderSync } = require("sass");
 
 
 let pokedexData = {
@@ -267,8 +268,10 @@ let pokedexDataTwo = {
         //Move name, stats for it
         var moveInfo = ([],[]);
         var moveStats = [];
-        var moveTest = ([],[]);
+        var moveTest = ([{name: 'move_name'}, {name: 'accuracy'}, {name: 'power'}, {name: 'pp'}, {name: 'type'}, {name: 'damage_class'}]);
         var moveListTest = [];
+
+        var moveBoxDesign = [];
         console.log(`The list of the names are as follows for the nameAndMoveSetup
         =========================================================================`);
         console.log(moveListNames);
@@ -278,9 +281,7 @@ let pokedexDataTwo = {
         console.log(`How many moves are there for this Pokemon? ` + moveListNames.length);
 
         /*The following works:
-
         const { url } = data.moves[0].move;
-
         console.log(`The url for the move is: 
         ====================================`);
         console.log(url);
@@ -294,27 +295,66 @@ let pokedexDataTwo = {
             console.log(`The current information is: 
             =========================================`);
             //name, accuracy, power, pp, name, type, damage_class
-
             console.log(moveTest);
         });
-
         */
+
+        const promises = [];
+
         for (let j=0; j<moveListNames.length; j++)
-        {
+        {   
             const { url } = data.moves[j].move;
+
+
+            /*
             fetch(url)
             .then((response) => response.json())
-            .then(data => {
-                moveTest = ([data.name, data.accuracy, data.power, data.pp, data.type.name, data.damage_class.name]);
+            .then(move_data => {
+                moveTest = ([{move_name: move_data.name, move_accuracy:move_data.accuracy, move_power:move_data.power, move_pp:move_data.pp, move_typing:move_data.type.name, move_damage_class:move_data.damage_class.name}]);
                 moveListTest.push(moveTest);
-                //name, accuracy, power, pp, name, type, damage_class
-                //console.log(moveListTest);
             })
+            */
+           promises.push(fetch(url).then(res => res.json()));
+           
         }
+        Promise.all(promises).then(results => {
+            console.log(`Promise test results: `);
+            console.log(results);
+            this.nameAndMoveDisplay (data, results);
+        })
+
+        
+        /*
         console.log(`The full list of the moves are:
         ============================================`);
         console.log(moveListTest);
+        console.log(`The first move on the first array is:
+        ==================================================`);
+        console.log(moveListTest.length);
+        */
 
+        /*
+        moveBoxDesign.push(
+            `
+            <div id ="boxDesign">
+                <h2 id="">${moveListTest}</h2>
+            </div>
+            `
+        )
+        */
+    },
+    nameAndMoveDisplay: function (data, moveListTest){
+
+        //name, accuracy, power, pp, type, damage class
+        var moveInfoList = [[{name: 'move_name'}, {name: 'accuracy'}, {name: 'power'}, {name: 'pp'}, {name: 'type'}, {name: 'damage_class'}]];
+        console.log(`moveListTest data: `);
+        console.log(moveListTest);
+
+        console.log(`
+        Get the information for the first move List: 
+        =========================================================`);
+        console.log(moveListTest[0]);
+        
     }
 
 };
