@@ -324,29 +324,12 @@ let pokedexDataTwo = {
         })
 
         
-        /*
-        console.log(`The full list of the moves are:
-        ============================================`);
-        console.log(moveListTest);
-        console.log(`The first move on the first array is:
-        ==================================================`);
-        console.log(moveListTest.length);
-        */
-
-        /*
-        moveBoxDesign.push(
-            `
-            <div id ="boxDesign">
-                <h2 id="">${moveListTest}</h2>
-            </div>
-            `
-        )
-        */
     },
     nameAndMoveDisplay: function (data, moveListTest){
 
         //name, accuracy, power, pp, type, damage class
-        var moveInfoList = [[{name: 'move_name'}, {name: 'accuracy'}, {name: 'power'}, {name: 'pp'}, {name: 'type'}, {name: 'damage_class'}]];
+        var moveInfoList;
+        var moveStoreList = [];
         console.log(`moveListTest data: `);
         console.log(moveListTest);
 
@@ -354,7 +337,35 @@ let pokedexDataTwo = {
         Get the information for the first move List: 
         =========================================================`);
         console.log(moveListTest[0]);
-        
+
+        for (let i = 0; i<moveListTest.length; i++)
+        {
+            var move_name, accuracy, power, pp, typing, className;
+            move_name = moveListTest[i].name;
+            accuracy = moveListTest[i].accuracy;
+            power = moveListTest[i].power;
+            pp = moveListTest[i].pp;
+            typing = moveListTest[i].type.name;
+            className = moveListTest[i].damage_class.name;
+
+            moveInfoList = {move_name: move_name, accuracy:accuracy, power:power, PP:pp, typing:typing, className:className};
+
+            moveStoreList.push(moveInfoList);
+
+        }
+
+        this.moveAttempt(data, moveStoreList);
+
+    },
+    moveAttempt: function(data, moveList){
+        console.log(`
+        The information for the moveList is:
+        ===================================`);
+        console.log(moveList);
+        console.log(`
+        The information for the name is:
+        ================================`);
+        console.log(moveList[0]);
     }
 
 };

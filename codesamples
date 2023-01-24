@@ -1,0 +1,36 @@
+        for (let j=0; j<moveListNames.length; j++)
+        {
+
+            let delay = (min, max) => {
+                return new Promise(resolve => {
+                    setTimeout(resolve, Math.random() * (max - min) + min)
+                })
+            }
+
+            function delayTwo(ms){
+                
+            }
+            
+            const { url } = data.moves[j].move;
+            fetch(url)
+            .then((response) => response.json())
+            .then(move_data => {
+                moveTest = ([{move_name: move_data.name, move_accuracy:move_data.accuracy, move_power:move_data.power, move_pp:move_data.pp, move_typing:move_data.type.name, move_damage_class:move_data.damage_class.name}]);
+                moveListTest.push(moveTest);
+                //console.log(`The name of the move is: 
+                //====================================`);
+                //console.log(moveTest.move_name);
+                /*
+                console.log(`The information for the moveListTest is:
+                =====================================================`);
+                console.log(moveListTest);
+                */
+                //name, accuracy, power, pp, name, type, damage_class
+                //console.log(moveListTest);
+            })
+            //setInterval(1000);
+            if( j == moveListNames.length-1)
+            {
+                this.nameAndMoveDisplay (data, moveListTest);
+            }
+        }
