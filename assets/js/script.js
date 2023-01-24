@@ -265,13 +265,7 @@ let pokedexDataTwo = {
         this.nameAndMoveSetUp(data, moveListNames);
     },
     nameAndMoveSetUp(data, moveListNames){
-        //Move name, stats for it
-        var moveInfo = ([],[]);
-        var moveStats = [];
-        var moveTest = ([{name: 'move_name'}, {name: 'accuracy'}, {name: 'power'}, {name: 'pp'}, {name: 'type'}, {name: 'damage_class'}]);
-        var moveListTest = [];
 
-        var moveBoxDesign = [];
         console.log(`The list of the names are as follows for the nameAndMoveSetup
         =========================================================================`);
         console.log(moveListNames);
@@ -280,41 +274,14 @@ let pokedexDataTwo = {
         console.log(data);
         console.log(`How many moves are there for this Pokemon? ` + moveListNames.length);
 
-        /*The following works:
-        const { url } = data.moves[0].move;
-        console.log(`The url for the move is: 
-        ====================================`);
-        console.log(url);
-        fetch(url)
-        .then((response) => response.json())
-        .then(data => {
-            console.log(`The information for the data is: 
-            ============================================`);
-            console.log(data);
-            moveTest = ([data.name, data.accuracy, data.power, data.pp, data.type.name, data.damage_class.name]);
-            console.log(`The current information is: 
-            =========================================`);
-            //name, accuracy, power, pp, name, type, damage_class
-            console.log(moveTest);
-        });
-        */
-
         const promises = [];
 
         for (let j=0; j<moveListNames.length; j++)
         {   
             const { url } = data.moves[j].move;
 
-
-            /*
-            fetch(url)
-            .then((response) => response.json())
-            .then(move_data => {
-                moveTest = ([{move_name: move_data.name, move_accuracy:move_data.accuracy, move_power:move_data.power, move_pp:move_data.pp, move_typing:move_data.type.name, move_damage_class:move_data.damage_class.name}]);
-                moveListTest.push(moveTest);
-            })
-            */
-           promises.push(fetch(url).then(res => res.json()));
+            //In order for this to work PROPERLY without any issues with the time, we need to make sure that ALL PROMISES are read asynced.  The reason why is because on this particular area, we want to get the information on ALL moves, NOT just one name.  Thus, we need to create PROMISES
+            promises.push(fetch(url).then(res => res.json()));
            
         }
         Promise.all(promises).then(results => {
@@ -322,7 +289,6 @@ let pokedexDataTwo = {
             console.log(results);
             this.nameAndMoveDisplay (data, results);
         })
-
         
     },
     nameAndMoveDisplay: function (data, moveListTest){
@@ -358,14 +324,105 @@ let pokedexDataTwo = {
 
     },
     moveAttempt: function(data, moveList){
+
+        //Information:
+        //Move List Words for display
+        moveListFormatted = [];
+        //Typing
+        moveTypeListFormatted = [];
+        //The Class Name formatted
+        moveClassNameFormatted = [];
+
+        //Box design
+        boxDesign = [];
+
         console.log(`
         The information for the moveList is:
         ===================================`);
         console.log(moveList);
+
         console.log(`
-        The information for the name is:
-        ================================`);
-        console.log(moveList[0]);
+        The information for ${moveList[0]} is the following:
+        ===================================================`);
+        console.log(`
+        Move name: ${moveList[0].move_name}
+        Accuracy: ${moveList[0].accuracy}
+        Power: ${moveList[0].power}
+        PP: ${moveList[0].PP}
+        Move Type: ${moveList[0].typing}
+        Class Name: ${moveList[0].className}
+        Number of moves: ${moveList.length}
+        `)
+
+        //Organizing the name to display
+        for (let k=0; k<moveList.length; k++)
+        {
+            const moveNameTemp = moveList[k].move_name;
+            //If it detects '-', separate it
+            const wordsSplitCap = moveNameTemp.split("-");
+    
+            //When we detected the move being split, apply this:
+            /*
+                1.  Separate it when it detects the '-'
+                2.  Separate EACH word from the first letter, capatilize it
+                3.  Tie together the string with the other letters, but this time, without the first letter
+            */
+            for (let j=0; j< wordsSplitCap.length; j++)
+            {
+                wordsSplitCap[j] = wordsSplitCap[j][0].toUpperCase() + wordsSplitCap[j].substr(1);
+            }
+
+            //Have finalNameLaytout be the result of the words(s) and have it join with a " " if it's appropriate
+            var finalNameLayout = wordsSplitCap.join(" ");
+
+            moveListFormatted.push(finalNameLayout);
+
+            const moveTypeCap = moveList[k].typing;
+            const typeListCap = moveTypeCap.charAt(0).toUpperCase() + moveTypeCap.slice(1);
+            moveTypeListFormatted.push(typeListCap);
+
+            const classNameCap = moveList[k].className;
+            const classNameTest = classNameCap.charAt(0).toUpperCase() + classNameCap.slice(1);
+            moveClassNameFormatted.push(classNameTest);
+
+        }
+        
+        console.log(`
+        The format for the name of the list is:
+        ===============================`);
+        console.log(moveListFormatted);
+
+        console.log(`
+        The type of the move format is:
+        ===============================`);
+        console.log(moveTypeListFormatted);
+
+        console.log(`
+        The class name List for the whole thing is:
+        ===============================`);
+        console.log(moveClassNameFormatted);
+        //FINALLY WE CAN CONSTRUCT THE DESIGN
+        //Input a move on this:
+        //boxDesign
+        boxDesign.push(
+            `
+            <div class="move_block">
+                <h2>${moveListFormatted[0]}</h2>
+                <p>Type:    ${moveTypeListFormatted[0]}</p>
+                <p>PP:  ${moveList[0].PP}</p>
+                <p>Power: ${moveList[0].power}</p>
+                <p>Category:    ${moveClassNameFormatted[0]}<p>
+                <p>Description of the attack will be added a bit later.  Still need
+                to find a way to extract the information.</p>
+            </div>
+            `
+        );
+        console.log(`
+        The Design information for the move so far is:
+        =============================================`);
+        console.log(boxDesign);
+        document.querySelector(".move_list").innerHTML = boxDesign;
+
     }
 
 };

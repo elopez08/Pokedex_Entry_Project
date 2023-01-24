@@ -4,8 +4,6 @@
 
 p{
     color: white;
-    -webkit-text-stroke: 1px black;
-    font-size: 3vh;
 }
 /* Shortcut Solution for the Capitalize */
 p::first-letter{
@@ -381,4 +379,17 @@ p::first-letter{
 
 .move_name_list {
     height: 400px;
+}
+
+.move_list {
+    height: 400px;
+    width: 800px;
+    background-color: rgb(46, 134, 114);
+    opacity: 1.0;
+    padding: 10px;
+
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
